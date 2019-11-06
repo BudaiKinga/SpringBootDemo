@@ -1,14 +1,76 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Getting Started: Serving Web Content</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<style>
+table {
+  border: 1px solid black;
+  margin: auto
+}
+
+th{
+ border: 1px solid black;
+ background: lightgrey
+}
+
+td {
+ border: 1px solid black;
+ color:#D0CDD7
+}
+
+a {
+ color:#D0CDD7
+ }
+
+form {
+ margin: 20px
+}
+
+</style>
 </head>
 <body>
 
-    <tr th:each="student: ${students}">
-        <td th:text="${student.id}" />
-        <td th:text="${student.name}" />
-    </tr>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <style>
+    h1 {color:#D0CDD7}
+    body {background-color:#416165}
+    label,p {color:#D9DBF1}
+
+    </style>
+</head>
+
+
+
+<body>
+
+<form th:action="@{/processTable}" th:object="${typeFormObject}" method="post" align="center">
+    <label>Device type:</label>
+    <input type="text" th:field="*{name}" />
+    <input type = "submit" name = "filter" value="Filter"/>
+    <input type = "submit" name = "clear" value="Clear"/>
+</form>
+
+    <table>
+        <thead>
+        <tr>
+            <th align="center"> Id </th>
+            <th style="width:50%"> Name </th>
+            <th> Type </th>
+            <th> Price </th>
+            <th> Link to details </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="device : ${devices}">
+            <td><span th:text="${device.id}"> Id </span></td>
+            <td><span th:text="${device.name}"> Name </span></td>
+            <td><span th:text="${device.type}"> Name </span></td>
+            <td><span th:text="${device.price}"> Name </span></td>
+            <td><a th:href="${device.link}" target="_blank"> Details </a></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
